@@ -150,7 +150,7 @@
     }
   ],
   "certifications": [
-    { "year": "2025", "name": "SAP Certified Professional – Solution Architect – SAP BTP", "issuer": "SAP", "featured": true },
+    { "year": "2025", "name": "SAP Certified Professional – Solution Architect – SAP BTP", "issuer": "SAP" },
     { "year": "2024", "name": "Positioning SAP Business AI", "issuer": "SAP" },
     { "year": "2024", "name": "SAP Build BlackBelt Program", "issuer": "SAP" },
     { "year": "2020", "name": "Planning with SAP Analytics Cloud", "issuer": "SAP" },
