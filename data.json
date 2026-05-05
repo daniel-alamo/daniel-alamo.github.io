@@ -1,0 +1,180 @@
+{
+  "personal": {
+    "name": "Daniel Álamo Casanueva",
+    "tagline": {
+      "en": "SAP BTP Solution Advisor\nSenior Specialist",
+      "es": "Asesor de Soluciones SAP BTP\nEspecialista Senior"
+    },
+    "location": "Madrid, Spain",
+    "phone": "(+34) 656 33 21 54",
+    "email": "danialamo89@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/daniel-%C3%A1lamo-casanueva-368a55143/",
+    "linkedinLabel": "linkedin.com/in/daniel-alamo",
+    "headerSub": {
+      "en": "SAP BTP Technical Lead · Solution Architect · Technical Presales Manager",
+      "es": "Líder Técnico SAP BTP · Arquitecto de Soluciones · Director de Preventa Técnica"
+    }
+  },
+  "about": {
+    "en": "Strategic architect and technical lead with <strong>13+ years</strong> in the SAP ecosystem, bridging complex enterprise requirements and scalable cloud solutions. Specialised in SAP BTP, AI-driven finance solutions, and cloud-native integration architecture. Proven track record advising C-suite stakeholders, leading technical teams, and driving digital transformation across industries including Finance, Retail, Manufacturing, and Public Sector.",
+    "es": "Arquitecto estratégico y líder técnico con <strong>más de 13 años</strong> en el ecosistema SAP, conectando requisitos empresariales complejos con soluciones cloud escalables. Especializado en SAP BTP, soluciones de finanzas basadas en IA y arquitectura de integración cloud-native. Amplia experiencia asesorando a directivos, liderando equipos técnicos e impulsando la transformación digital en Finanzas, Retail, Industria y Sector Público."
+  },
+  "skills": [
+    { "name": "SAP BTP", "level": 98 },
+    { "name": "SAP S/4HANA", "level": 95 },
+    { "name": "ABAP / RAP / CAP", "level": 90 },
+    { "name": { "en": "Cloud Architecture", "es": "Arquitectura Cloud" }, "level": 88 },
+    { "name": "AI / Machine Learning", "level": 85 },
+    { "name": "SAP Analytics Cloud", "level": 85 },
+    { "name": "Integration Suite", "level": 80 },
+    { "name": "SQL / SAP HANA DB", "level": 75 }
+  ],
+  "languages": [
+    { "name": { "en": "Spanish", "es": "Español" }, "level": { "en": "Native", "es": "Nativo" }, "badge": "native" },
+    { "name": { "en": "English", "es": "Inglés" }, "level": "C1", "badge": "c1" },
+    { "name": { "en": "French", "es": "Francés" }, "level": "B1", "badge": "b1" }
+  ],
+  "technologies": [
+    "SAP BTP", "S/4HANA", "SAP HANA", "SAP BW", "ABAP IV", "RAP", "CAP",
+    "Fiori", "CPI", "Mulesoft", "SQL", "JavaScript", "HTML5 / CSS",
+    "R", "Python", "Tableau", "Power BI", "Agile / Scrum"
+  ],
+  "jobs": [
+    {
+      "role": { "en": "BTP Solution Advisor, Senior Specialist", "es": "Asesor de Soluciones BTP, Especialista Senior" },
+      "company": "SAP SE",
+      "date": { "en": "Jan 2022 — Present", "es": "Ene 2022 — Presente" },
+      "description": {
+        "en": "Strategic architect and technical lead bridging complex customer requirements and scalable cloud solutions. Designing robust integration, extension, and data analytics frameworks within SAP BTP. Advising C-suite stakeholders on best practices, optimising enterprise landscapes, and driving innovation through SAP's cloud-native services.",
+        "es": "Arquitecto estratégico y líder técnico que conecta los requisitos complejos de los clientes con soluciones cloud escalables. Diseño de marcos robustos de integración, extensión y analítica de datos dentro de SAP BTP. Asesoramiento a directivos sobre mejores prácticas, optimización de landscapes empresariales e innovación a través de los servicios cloud-native de SAP."
+      },
+      "tags": [
+        "SAP BTP",
+        { "en": "Cloud Architecture", "es": "Arquitectura Cloud" },
+        "Integration",
+        "Presales"
+      ]
+    },
+    {
+      "role": { "en": "SAP & AI Solutions Engineer", "es": "Ingeniero de Soluciones SAP e IA" },
+      "company": "BASF",
+      "date": { "en": "May 2021 — Dec 2022", "es": "May 2021 — Dic 2022" },
+      "description": {
+        "en": "Developed AI solutions for Finance (Treasury, Accounts Receivables) within the Cash & Credit Management team. Integrated SQL, ABAP, R algorithms and Machine Learning techniques (classification, reinforcement learning) into hybrid HANA/BW scenarios using SAP BTP, SAP Analytics Cloud, S/4HANA, and SAP BW.",
+        "es": "Desarrollo de soluciones de IA para Finanzas (Tesorería, Cuentas a Cobrar) dentro del equipo de Gestión de Efectivo y Crédito. Integración de algoritmos SQL, ABAP, R y técnicas de Machine Learning (clasificación, aprendizaje por refuerzo) en escenarios híbridos HANA/BW usando SAP BTP, SAP Analytics Cloud, S/4HANA y SAP BW."
+      },
+      "tags": ["AI / ML", "SAP HANA", "S/4HANA", "Analytics Cloud", "ABAP"]
+    },
+    {
+      "role": { "en": "SAP BI Manager", "es": "Director BI SAP" },
+      "company": "SDG Group",
+      "date": { "en": "Oct 2020 — Apr 2021", "es": "Oct 2020 — Abr 2021" },
+      "description": {
+        "en": "Managed BI projects across Data Engineering, Visual Discovery, Data Governance, and Predictive Analytics. Led a technical team of ~20 consultants with direct client responsibilities and SAP partnership involvement.",
+        "es": "Gestión de proyectos BI en Ingeniería de Datos, Descubrimiento Visual, Gobierno del Dato y Analítica Predictiva. Liderazgo de un equipo técnico de ~20 consultores con responsabilidad directa ante el cliente e implicación con el partnership SAP."
+      },
+      "tags": [
+        { "en": "Team Lead", "es": "Jefe de Equipo" },
+        "BI",
+        { "en": "Data Governance", "es": "Gobierno del Dato" },
+        { "en": "Predictive Analytics", "es": "Analítica Predictiva" }
+      ]
+    },
+    {
+      "role": { "en": "SAP BI Senior Consultant", "es": "Consultor Senior BI SAP" },
+      "company": "SDG Group",
+      "date": { "en": "Oct 2016 — Sep 2020", "es": "Oct 2016 — Sep 2020" },
+      "description": {
+        "en": "Senior consultant across ABAP, SAP HANA, SAP BW, SAP Analytics Cloud and SAP BO. Also delivered projects using Tableau and Power BI.",
+        "es": "Consultor senior en ABAP, SAP HANA, SAP BW, SAP Analytics Cloud y SAP BO. También impartió proyectos con Tableau y Power BI."
+      },
+      "tags": ["SAP BW", "SAP BO", "Tableau", "Power BI"]
+    },
+    {
+      "role": { "en": "SAP Consultant", "es": "Consultor SAP" },
+      "company": "Consultia IT",
+      "date": { "en": "Oct 2011 — Oct 2016", "es": "Oct 2011 — Oct 2016" },
+      "description": {
+        "en": "SAP ECC projects across Public Sector, Retail, Manufacturing, Supply Chain, Financials and Pharma. Worked with ABAP IV and SAP Standard Customising.",
+        "es": "Proyectos SAP ECC en Sector Público, Retail, Industria, Cadena de Suministro, Finanzas y Farmacia. Trabajo con ABAP IV y Customising estándar de SAP."
+      },
+      "tags": [
+        "SAP ECC",
+        "ABAP IV",
+        { "en": "Customising", "es": "Customising" },
+        { "en": "Multi-sector", "es": "Multisector" }
+      ]
+    },
+    {
+      "role": { "en": "Internship — Systems Analyst", "es": "Prácticas — Analista de Sistemas" },
+      "company": "INDRA Sistemas",
+      "date": { "en": "Apr — Oct 2011", "es": "Abr — Oct 2011" },
+      "description": {
+        "en": "Technical analysis and design of corporate systems and reporting tools for ENRESA.",
+        "es": "Análisis técnico y diseño de sistemas corporativos y herramientas de reporting para ENRESA."
+      },
+      "tags": ["Systems Analysis", "Java", "Process Analysis"],
+      "minor": true
+    },
+    {
+      "role": { "en": "IT Support Internship", "es": "Prácticas — Soporte Informático" },
+      "company": "Universidad Carlos III de Madrid",
+      "date": { "en": "Nov 2009 — Apr 2011", "es": "Nov 2009 — Abr 2011" },
+      "description": {
+        "en": "Hardware and software support in the university IT department.",
+        "es": "Soporte de hardware y software en el departamento informático de la universidad."
+      },
+      "tags": ["IT Support", "Hardware", "Software"],
+      "minor": true
+    }
+  ],
+  "education": [
+    {
+      "years": "2010–2012",
+      "title": { "en": "Computer Engineering", "es": "Ingeniería Informática" },
+      "institution": "Universidad Carlos III de Madrid",
+      "sub": null
+    },
+    {
+      "years": "2007–2010",
+      "title": { "en": "Technical Computer Engineering", "es": "Ingeniería Técnica en Informática" },
+      "institution": null,
+      "sub": { "en": "Specialised in Management · UC3M", "es": "Especialidad en Gestión · UC3M" }
+    }
+  ],
+  "certifications": [
+    { "year": "2025", "name": "SAP Certified Professional – Solution Architect – SAP BTP", "issuer": "SAP", "featured": true },
+    { "year": "2024", "name": "Positioning SAP Business AI", "issuer": "SAP" },
+    { "year": "2024", "name": "SAP Build BlackBelt Program", "issuer": "SAP" },
+    { "year": "2020", "name": "Planning with SAP Analytics Cloud", "issuer": "SAP" },
+    { "year": "2016", "name": "SAP Fiori App in the Cloud", "issuer": "SAP" },
+    { "year": "2016", "name": "Implementation of SAP S/4HANA", "issuer": "SAP" },
+    { "year": "2013", "name": "PMP Exam Preparation", "issuer": "PMI" }
+  ],
+  "ui": {
+    "en": {
+      "contact": "Contact",
+      "coreSkills": "Core Skills",
+      "languages": "Languages",
+      "technologies": "Technologies",
+      "cvLabel": "Curriculum Vitae",
+      "downloadBtn": "Download PDF",
+      "about": "About",
+      "experience": "Experience",
+      "education": "Education & Certifications",
+      "certifications": "Certifications"
+    },
+    "es": {
+      "contact": "Contacto",
+      "coreSkills": "Habilidades Principales",
+      "languages": "Idiomas",
+      "technologies": "Tecnologías",
+      "cvLabel": "Currículum Vítae",
+      "downloadBtn": "Descargar PDF",
+      "about": "Sobre mí",
+      "experience": "Experiencia",
+      "education": "Formación y Certificaciones",
+      "certifications": "Certificaciones"
+    }
+  }
+}

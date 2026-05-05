@@ -1,107 +1,201 @@
 # Daniel Álamo Casanueva — CV Webpage
 
-A static personal CV website built with plain HTML, CSS, and JavaScript. No frameworks, no build step — just open `index.html` in a browser.
+A static personal CV website built with plain HTML, CSS, and JavaScript. No frameworks, no build step. All content is stored in `data.json` — edit that one file to update anything on the CV.
 
 ## Project structure
 
 ```
 CV_Webpage/
-├── index.html           # Main page
-├── style.css            # All styles
-├── script.js            # Animations (skill bars, section fade-ins)
-├── photo.png            # Profile photo
-└── Daniel_Alamo_CV.pdf  # Downloadable CV (linked from the Download button)
+├── data.json      # ← ALL CV content lives here — the only file you need to edit
+├── index.html     # Page structure (empty containers, no hardcoded content)
+├── style.css      # All styles and layout
+├── script.js      # Fetches data.json, renders the page, generates the PDF
+└── photo.png      # Profile photo
 ```
 
 ---
 
 ## Local preview
 
-Double-click `index.html`, or from a terminal:
+`script.js` fetches `data.json` at runtime, so you **must** serve the files through a local HTTP server. Opening `index.html` directly as a `file://` URL will block the fetch.
 
 ```bash
-# macOS / Linux
-open index.html
-
-# Windows
-start index.html
-```
-
-For a proper local server (avoids any CORS quirks):
-
-```bash
-# Python 3
+# Python 3 — run this inside the CV_Webpage folder
 python -m http.server 8080
-# then open http://localhost:8080
 ```
 
----
-
-## Deploying to a domain
-
-You only need to upload 5 files: `index.html`, `style.css`, `script.js`, `photo.png`, and `Daniel_Alamo_CV.pdf`. No backend, no database.
-
-### Option A — GitHub Pages (free, great for personal CVs)
-
-1. Create a GitHub account at <https://github.com> if you don't have one.
-2. Create a new **public** repository named `<your-username>.github.io`  
-   *(e.g. `daniel-alamo.github.io`)*
-3. Upload the five files to the root of that repository (drag & drop in the browser UI, or push via git).
-4. Go to **Settings → Pages** and set the source to **Deploy from branch → main → / (root)**.
-5. Your CV will be live at `https://<your-username>.github.io` within a couple of minutes.
-
-**Custom domain with GitHub Pages:**
-
-1. Buy a domain (Namecheap, GoDaddy, Cloudflare Registrar, etc.).
-2. In your domain registrar's DNS settings, add:
-   - `A` record → `185.199.108.153` (and the other three GitHub Pages IPs)
-   - `CNAME` record → `www` → `<your-username>.github.io`
-3. In GitHub Pages settings, enter your custom domain and tick **Enforce HTTPS**.
+Then open <http://localhost:8080>.
 
 ---
 
-### Option B — Netlify (drag & drop, free tier)
+## Editing the CV — `data.json` reference
 
-1. Go to <https://netlify.com> and sign up.
-2. On the dashboard click **Add new site → Deploy manually**.
-3. Drag the entire `CV_Webpage` folder onto the upload zone.
-4. Netlify gives you a random URL instantly (e.g. `quirky-name-123.netlify.app`).
-5. To use a custom domain: **Site settings → Domain management → Add custom domain**.
+`data.json` is a single JSON file with the following top-level sections. Every field that has both an English and a Spanish version is written as `{ "en": "...", "es": "..." }`. Fields that don't change between languages (company names, email, tech names) are plain strings.
+
+### `personal` — contact info & header text
+
+```json
+"personal": {
+  "name": "Daniel Álamo Casanueva",
+  "tagline": { "en": "SAP BTP Solution Advisor\nSenior Specialist",
+               "es": "Asesor de Soluciones SAP BTP\nEspecialista Senior" },
+  "location": "Madrid, Spain",
+  "phone": "(+34) 656 33 21 54",
+  "email": "danialamo89@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/...",
+  "linkedinLabel": "linkedin.com/in/daniel-alamo",
+  "headerSub": { "en": "SAP BTP Technical Lead · Solution Architect",
+                 "es": "Líder Técnico SAP BTP · Arquitecto de Soluciones" }
+}
+```
+
+### `about` — the summary paragraph (supports `<strong>` tags)
+
+```json
+"about": {
+  "en": "Strategic architect with <strong>13+ years</strong> ...",
+  "es": "Arquitecto estratégico con <strong>más de 13 años</strong> ..."
+}
+```
+
+### `skills` — sidebar progress bars
+
+```json
+"skills": [
+  { "name": "SAP BTP", "level": 98 },
+  { "name": { "en": "Cloud Architecture", "es": "Arquitectura Cloud" }, "level": 88 }
+]
+```
+
+- `name` — plain string (same in both languages) or `{ "en": "...", "es": "..." }`
+- `level` — integer 0–100, controls the bar width
+
+### `languages` — sidebar language badges
+
+```json
+"languages": [
+  { "name": { "en": "Spanish", "es": "Español" },
+    "level": { "en": "Native", "es": "Nativo" },
+    "badge": "native" },
+  { "name": { "en": "English", "es": "Inglés" }, "level": "C1", "badge": "c1" },
+  { "name": { "en": "French",  "es": "Francés" }, "level": "B1", "badge": "b1" }
+]
+```
+
+- `badge` — controls the badge colour; accepted values: `native`, `c1`, `b1`
+
+### `technologies` — sidebar pill cloud
+
+```json
+"technologies": ["SAP BTP", "S/4HANA", "CAP", "Fiori", "Python", ...]
+```
+
+Plain array of strings. Add, remove, or reorder freely.
+
+### `jobs` — experience timeline (ordered top to bottom)
+
+```json
+"jobs": [
+  {
+    "role":        { "en": "BTP Solution Advisor", "es": "Asesor de Soluciones BTP" },
+    "company":     "SAP SE",
+    "date":        { "en": "Jan 2022 — Present", "es": "Ene 2022 — Presente" },
+    "description": { "en": "...", "es": "..." },
+    "tags": [
+      "SAP BTP",
+      { "en": "Cloud Architecture", "es": "Arquitectura Cloud" }
+    ],
+    "minor": false
+  }
+]
+```
+
+- `tags` — each tag is a plain string or `{ "en": "...", "es": "..." }`
+- `minor` — set to `true` for internship/early-career roles (smaller dot on the timeline); omit or set `false` otherwise
+
+### `education` — education cards (displayed as a two-column grid)
+
+```json
+"education": [
+  {
+    "years":       "2010–2012",
+    "title":       { "en": "Computer Engineering", "es": "Ingeniería Informática" },
+    "institution": "Universidad Carlos III de Madrid",
+    "sub":         null
+  },
+  {
+    "years":       "2007–2010",
+    "title":       { "en": "Technical Computer Engineering", "es": "Ingeniería Técnica" },
+    "institution": null,
+    "sub":         { "en": "Specialised in Management · UC3M", "es": "Especialidad en Gestión · UC3M" }
+  }
+]
+```
+
+- Use `institution` for the institution line when it doesn't need translation, or `sub` for a translated subtitle. Set the unused one to `null`.
+
+### `certifications` — certification list
+
+```json
+"certifications": [
+  { "year": "2025", "name": "SAP Certified Professional – Solution Architect – SAP BTP",
+    "issuer": "SAP", "featured": true },
+  { "year": "2024", "name": "Positioning SAP Business AI", "issuer": "SAP" }
+]
+```
+
+- `featured` — set to `true` to highlight the row (bolder text, accent border); omit or `false` for regular rows
+- Certification names are not translated (they are official credential titles)
+
+### `ui` — section labels and button text
+
+```json
+"ui": {
+  "en": { "contact": "Contact", "coreSkills": "Core Skills", "about": "About",
+          "experience": "Experience", "education": "Education & Certifications",
+          "certifications": "Certifications", "languages": "Languages",
+          "technologies": "Technologies", "cvLabel": "Curriculum Vitae",
+          "downloadBtn": "Download PDF" },
+  "es": { "contact": "Contacto", "coreSkills": "Habilidades Principales", ... }
+}
+```
+
+Only edit this if you want to rename a section heading or the download button label.
 
 ---
 
-### Option C — Vercel (free, fast CDN)
+## Deploying
 
-1. Install the Vercel CLI: `npm i -g vercel`
-2. From inside the `CV_Webpage` folder run: `vercel`
-3. Follow the prompts — it deploys in seconds.
-4. Add a custom domain in the Vercel dashboard under **Domains**.
+Upload these five files to any static host: `index.html`, `style.css`, `script.js`, `data.json`, `photo.png`. No backend or build step required.
 
----
+### Option A — GitHub Pages (free)
 
-### Option D — Traditional hosting (cPanel / FTP)
+1. Create a public repository named `<your-username>.github.io`.
+2. Push (or drag & drop) the five files to the root of the `main` branch.
+3. Go to **Settings → Pages**, set source to **Deploy from branch → main → / (root)**.
+4. Live at `https://<your-username>.github.io` within a few minutes.
 
-1. Log in to your host's **File Manager** or connect via FTP (FileZilla, Cyberduck).
-2. Navigate to `public_html` (or `www`, depending on your host).
-3. Upload the five files.
-4. Point your domain's DNS `A` record to your host's IP address.
+**Custom domain:** Add an `A` record pointing to GitHub's IPs (`185.199.108.153` etc.) and set the custom domain in Pages settings.
 
----
+### Option B — Netlify (drag & drop)
 
-## Updating the CV
+1. <https://netlify.com> → **Add new site → Deploy manually**.
+2. Drag the project folder onto the upload zone.
+3. Instant URL. Add a custom domain in **Site settings → Domain management**.
 
-| What to change | Where |
-|---|---|
-| Text content / experience | `index.html` |
-| Colors, fonts, layout | `style.css` |
-| Profile photo | Replace `photo.png` (keep same filename) |
-| Downloadable PDF | Replace `Daniel_Alamo_CV.pdf` (keep same filename) |
+### Option C — Vercel
 
-After editing, re-upload only the changed files.
+```bash
+npm i -g vercel
+vercel   # run inside the project folder
+```
+
+### Option D — Traditional hosting (FTP / cPanel)
+
+Upload the five files to `public_html` and point your domain's `A` record to the host IP.
 
 ---
 
 ## HTTPS / SSL
 
-All four options above give you free HTTPS automatically (Let's Encrypt).  
-Never serve a personal CV over plain HTTP — browsers will warn visitors.
+All options above provide free HTTPS automatically. Never serve a personal CV over plain HTTP.

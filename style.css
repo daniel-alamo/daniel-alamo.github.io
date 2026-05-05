@@ -80,13 +80,11 @@ a:hover { opacity: .75; }
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  animation: spin 8s linear infinite;
   background: conic-gradient(from 0deg, var(--accent) 0%, var(--accent2) 40%, var(--accent3) 70%, transparent 80%);
   -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), white calc(100% - 2px));
   mask: radial-gradient(farthest-side, transparent calc(100% - 3px), white calc(100% - 2px));
   z-index: 1;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* Name & tagline */
 .name {
@@ -286,6 +284,44 @@ a:hover { opacity: .75; }
 .hc-location { cursor: default; }
 .hc-location:hover { color: var(--muted); }
 
+/* Header actions (lang switcher + download button) */
+.header-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .6rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Language switcher */
+.lang-switcher {
+  display: flex;
+  gap: .3rem;
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: .2rem;
+}
+.lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: .2rem .25rem;
+  border-radius: 6px;
+  opacity: .45;
+  transition: opacity .2s, background .2s, transform .15s;
+  display: flex;
+  align-items: center;
+}
+.lang-btn svg { width: 28px; height: 14px; border-radius: 2px; display: block; }
+.lang-btn:hover { opacity: .8; transform: scale(1.08); }
+.lang-btn.active {
+  opacity: 1;
+  background: rgba(59,130,246,.25);
+}
+
 /* Download button */
 .btn-download {
   position: relative;
@@ -307,7 +343,6 @@ a:hover { opacity: .75; }
   box-shadow: 0 4px 20px rgba(59,130,246,.35);
   align-self: flex-start;
   flex-shrink: 0;
-  margin-top: .25rem;
 }
 .btn-download:hover:not(:disabled) {
   transform: translateY(-2px);
@@ -330,6 +365,7 @@ a:hover { opacity: .75; }
 }
 .section.visible { opacity: 1; transform: translateY(0); }
 
+/* Section title — collapsible trigger */
 .section-title {
   font-family: var(--font2);
   font-size: 1rem;
@@ -341,6 +377,35 @@ a:hover { opacity: .75; }
   align-items: center;
   gap: .5rem;
 }
+.collapsible-trigger {
+  cursor: pointer;
+  user-select: none;
+}
+.collapsible-trigger:hover { color: var(--accent2); }
+.collapsible-trigger .chevron {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  color: var(--muted);
+  transition: transform .3s ease, color .2s;
+  flex-shrink: 0;
+}
+.collapsible-trigger:hover .chevron { color: var(--accent2); }
+.section.collapsed .chevron { transform: rotate(-90deg); }
+
+/* Collapsible section body */
+.section-body {
+  overflow: hidden;
+  transition: max-height .35s ease, opacity .3s ease;
+  max-height: 9999px;
+  opacity: 1;
+}
+.section.collapsed .section-body {
+  max-height: 0;
+  opacity: 0;
+}
+.section.collapsed .section-title { margin-bottom: 0; }
+
 .section-icon { color: var(--accent2); font-size: .7rem; }
 
 /* About */
@@ -408,6 +473,40 @@ a:hover { opacity: .75; }
   transform: translateX(4px);
   box-shadow: 0 4px 24px rgba(0,0,0,.25);
 }
+
+/* Timeline item collapsible */
+.tl-trigger {
+  cursor: pointer;
+  user-select: none;
+}
+.tl-header-right {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+.tl-chevron {
+  width: 15px;
+  height: 15px;
+  color: var(--muted);
+  transition: transform .3s ease, color .2s;
+  flex-shrink: 0;
+}
+.tl-trigger:hover .tl-chevron { color: var(--accent2); }
+.tl-item.collapsed .tl-chevron { transform: rotate(-90deg); }
+
+.tl-body {
+  overflow: hidden;
+  max-height: 600px;
+  opacity: 1;
+  transition: max-height .3s ease, opacity .25s ease;
+}
+.tl-item.collapsed .tl-body {
+  max-height: 0;
+  opacity: 0;
+}
+.tl-item.collapsed .tl-header { margin-bottom: 0; }
+.tl-item.collapsed .tl-tags { margin-top: .6rem; }
 
 .tl-header {
   display: flex;
@@ -558,7 +657,8 @@ a:hover { opacity: .75; }
     padding: 2rem 1.5rem;
     flex-direction: column;
   }
-  .btn-download { align-self: stretch; justify-content: center; width: 100%; }
+  .header-actions { flex-direction: row; align-self: stretch; justify-content: space-between; align-items: center; }
+  .btn-download { align-self: auto; justify-content: center; }
   .header-title { font-size: 1.9rem; }
   .section { padding: 2rem 1.5rem; }
   .main-footer { padding: 1.5rem; }
