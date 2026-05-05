@@ -27,16 +27,12 @@ function initSectionAnimations() {
 
 // ── Collapsible sections & timeline items ─────────────────────────────────
 function initCollapsible() {
-  document.querySelectorAll('.collapsible-trigger').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      trigger.closest('.section').classList.toggle('collapsed');
-    });
-  });
-  document.querySelectorAll('.tl-trigger').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      trigger.closest('.tl-item').classList.toggle('collapsed');
-    });
-  });
+  document.addEventListener('click', e => {
+    const section = e.target.closest('.collapsible-trigger');
+    if (section) { section.closest('.section').classList.toggle('collapsed'); return; }
+    const tl = e.target.closest('.tl-trigger');
+    if (tl) tl.closest('.tl-item').classList.toggle('collapsed');
+  }, { once: false });
 }
 
 // ── Page rendering ────────────────────────────────────────────────────────
@@ -200,7 +196,6 @@ function applyLang(lang) {
   if (!cvData) return;
   renderPage(cvData, lang);
   setTimeout(animateSkillBars, 50);
-  initCollapsible();
 }
 
 function initLangSwitcher() {
@@ -471,15 +466,14 @@ function buildMain(data, lang) {
     // Education & Certifications
     sectionTitle(ui.education),
     {
-      columns: data.education.map(edu => ({
-        width: '50%',
+      stack: data.education.map((edu, i) => ({
         stack: [
           { text: edu.years, fontSize: 7, color: C.accent2, bold: true, margin: [0, 0, 0, 2] },
-          { text: t(edu.title, lang), fontSize: 8, bold: true, color: C.text, margin: [0, 0, 0, 2] },
+          { text: t(edu.title, lang), fontSize: 8.5, bold: true, color: C.text, margin: [0, 0, 0, 2] },
           { text: edu.institution || t(edu.sub, lang), fontSize: 7, color: C.muted },
         ],
+        margin: [0, 0, 0, i < data.education.length - 1 ? 10 : 0],
       })),
-      columnGap: 12,
       margin: [0, 0, 0, 14],
     },
 

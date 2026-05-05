@@ -137,9 +137,9 @@
     },
     {
       "years": "2007–2010",
-      "title": { "en": "Technical Computer Engineering", "es": "Ingeniería Técnica en Informática" },
-      "institution": null,
-      "sub": { "en": "Specialised in Management · UC3M", "es": "Especialidad en Gestión · UC3M" }
+      "title": { "en": "Technical Engineering in Computer Managements", "es": "Ingeniería Técnica en Informática de Gestión" },
+      "institution": "Universidad Carlos III de Madrid",
+      "sub": null
     }
   ],
   "certifications": [
