@@ -119,6 +119,9 @@ function renderJobs(data, lang) {
   document.getElementById('timeline').innerHTML = data.jobs.map(job => {
     const dotClass = job.minor ? 'tl-dot small' : 'tl-dot';
     const tags = job.tags.map(tag => `<span>${t(tag, lang)}</span>`).join('');
+    const logoHtml = job.logo
+      ? `<img class="tl-company-logo" src="${job.logo}" alt="${job.company}" />`
+      : '';
     return `
       <div class="tl-item">
         <div class="${dotClass}"></div>
@@ -126,7 +129,7 @@ function renderJobs(data, lang) {
           <div class="tl-header tl-trigger">
             <div>
               <h3 class="tl-role">${t(job.role, lang)}</h3>
-              <p class="tl-company">${job.company}</p>
+              <p class="tl-company">${logoHtml}${job.company}</p>
             </div>
             <div class="tl-header-right">
               <span class="tl-date">${t(job.date, lang)}</span>
@@ -238,6 +241,22 @@ function loadPhotoBase64() {
     };
     img.onerror = () => resolve(null);
     img.src = 'photo.png';
+  });
+}
+
+function loadImageBase64(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width  = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      canvas.getContext('2d').drawImage(img, 0, 0);
+      resolve({ data: canvas.toDataURL('image/png'), width: img.naturalWidth, height: img.naturalHeight });
+    };
+    img.onerror = () => resolve(null);
+    img.src = url;
   });
 }
 
@@ -376,7 +395,23 @@ function buildSidebar(photoDataUrl, data, lang) {
   return items;
 }
 
-function tlItem(role, company, date, desc, tags) {
+function tlItem(role, company, date, desc, tags, logo) {
+  const companyCell = logo
+    ? (() => {
+        const MAX_W = 36, MAX_H = 12;
+        const ratio = logo.width / logo.height;
+        const w = Math.min(MAX_W, MAX_H * ratio);
+        const h = w / ratio;
+        return {
+          columns: [
+            { image: logo.data, width: w, height: h, margin: [0, (MAX_H - h) / 2, 0, 0] },
+            { text: company, fontSize: 7.5, color: C.accent2, margin: [0, 1, 0, 0] },
+          ],
+          columnGap: 4,
+        };
+      })()
+    : { text: company, fontSize: 7.5, color: C.accent2, margin: [0, 1, 0, 0] };
+
   return {
     margin: [0, 0, 0, 10],
     stack: [
@@ -384,8 +419,8 @@ function tlItem(role, company, date, desc, tags) {
         columns: [
           {
             stack: [
-              { text: role,    fontSize: 8.5, bold: true,  color: C.text },
-              { text: company, fontSize: 7.5, color: C.accent2, margin: [0, 1, 0, 0] },
+              { text: role, fontSize: 8.5, bold: true, color: C.text },
+              companyCell,
             ],
             width: '*',
           },
@@ -412,7 +447,7 @@ function tlItem(role, company, date, desc, tags) {
   };
 }
 
-function buildMain(data, lang) {
+function buildMain(data, lang, logoMap = {}) {
   const p = data.personal;
   const ui = data.ui[lang];
   const nameParts = p.name.split(' ');
@@ -458,8 +493,8 @@ function buildMain(data, lang) {
         job.company,
         t(job.date, lang),
         t(job.description, lang),
-        job.tags.map(tg => t(tg, lang))
-      )
+        job.tags.map(tg => t(tg, lang)),
+        job.logo ? logoMap[job.logo] : null      )
     ),
     hRule(370),
 
@@ -507,6 +542,11 @@ async function generatePDF() {
   try {
     const photoDataUrl = await loadPhotoBase64();
 
+    // Load all unique job logos as base64
+    const uniqueLogoUrls = [...new Set(cvData.jobs.map(j => j.logo).filter(Boolean))];
+    const logoEntries = await Promise.all(uniqueLogoUrls.map(url => loadImageBase64(url).then(result => [url, result])));
+    const logoMap = Object.fromEntries(logoEntries.filter(([, result]) => result));
+
     const docDefinition = {
       pageSize:    'A4',
       pageMargins: [0, 0, 0, 0],
@@ -526,7 +566,7 @@ async function generatePDF() {
               margin: [14, 20, 12, 20],
             },
             {
-              stack: buildMain(cvData, currentLang),
+              stack: buildMain(cvData, currentLang, logoMap),
               fillColor: C.dark,
               border: [false, false, false, false],
               margin: [16, 20, 18, 20],
